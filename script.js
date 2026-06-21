@@ -20,16 +20,14 @@ function isPeace(landmarks) {
 }
 
 const hands = new Hands({
-  locateFile: (file) => {
-    return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-  },
+  locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
 });
 
 hands.setOptions({
   maxNumHands: 1,
   modelComplexity: 1,
-  minDetectionConfidence: 0.5,
-  minTrackingConfidence: 0.5,
+  minDetectionConfidence: 0.6,
+  minTrackingConfidence: 0.6,
 });
 
 hands.onResults((results) => {
@@ -40,10 +38,7 @@ hands.onResults((results) => {
 
   if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
     const landmarks = results.multiHandLandmarks[0];
-
-    if (isPeace(landmarks)) {
-      peaceDetected = true;
-    }
+    peaceDetected = isPeace(landmarks);
   }
 
   ctx.save();
@@ -52,22 +47,22 @@ hands.onResults((results) => {
   ctx.translate(canvas.width, 0);
   ctx.scale(-1, 1);
 
-  if (peaceDetected) {
-    ctx.filter = "blur(18px)";
-    statusText.style.background = "#22c55e";
-  } else {
-    ctx.filter = "none";
-    statusText.style.background = "#ef4444";
-  }
-
+  ctx.filter = peaceDetected ? "blur(18px)" : "none";
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
   ctx.restore();
+
+  statusText.style.background = peaceDetected ? "#22c55e" : "#ef4444";
 });
 
 startBtn.addEventListener("click", async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: {
+        width: 1280,
+        height: 720,
+        facingMode: "user",
+      },
       audio: false,
     });
 
@@ -77,8 +72,8 @@ startBtn.addEventListener("click", async () => {
       onFrame: async () => {
         await hands.send({ image: video });
       },
-      width: 640,
-      height: 480,
+      width: 1280,
+      height: 720,
     });
 
     camera.start();
