@@ -33,8 +33,8 @@ hands.setOptions({
 });
 
 hands.onResults((results) => {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
+  canvas.width = video.videoWidth || 640;
+  canvas.height = video.videoHeight || 480;
 
   peaceDetected = false;
 
@@ -54,12 +54,10 @@ hands.onResults((results) => {
 
   if (peaceDetected) {
     ctx.filter = "blur(18px)";
-    statusText.textContent = "Peace terdeteksi - Blur ON";
-    statusText.style.background = "rgba(34, 197, 94, 0.85)";
+    statusText.style.background = "#22c55e";
   } else {
     ctx.filter = "none";
-    statusText.textContent = "Tunjukkan gesture ✌️";
-    statusText.style.background = "rgba(0, 0, 0, 0.65)";
+    statusText.style.background = "#ef4444";
   }
 
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -86,9 +84,9 @@ startBtn.addEventListener("click", async () => {
     camera.start();
 
     startBtn.style.display = "none";
-    statusText.textContent = "Kamera aktif";
+    statusText.style.background = "#ef4444";
   } catch (error) {
-    statusText.textContent = "Kamera gagal dibuka";
+    statusText.style.background = "#f59e0b";
     console.error(error);
   }
 });
