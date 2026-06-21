@@ -3,22 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Peace Blur Web</title>
+  <title>Peace Blur Polaroid</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
-    <h1>Peace Blur Detector</h1>
-    <p>Tunjukkan gesture ✌️ untuk membuat kamera blur</p>
+  <main class="page">
+    <section class="intro">
+      <div class="camera-icon">▣</div>
+      <div class="stars">✦ ✧</div>
 
-    <div class="camera-box">
-      <video id="video" autoplay playsinline></video>
-      <canvas id="canvas"></canvas>
-      <div id="status"></div>
-    </div>
+      <h1>PEACE BLUR</h1>
+      <div class="label">web camera effect</div>
 
-    <button id="startBtn">Mulai Kamera</button>
+      <div class="line">
+        <span></span>
+        <b>♡</b>
+      </div>
+
+      <div class="note">
+        <div class="tape"></div>
+        <p>Tunjukkan gesture ✌️<br />untuk membuat kamera blur</p>
+      </div>
+
+      <div class="mini-polaroid">
+        <div class="mini-tape"></div>
+        <div class="smile">☺</div>
+      </div>
+    </section>
+
+    <section class="camera-area">
+      <div class="top-tape"></div>
+
+      <div class="polaroid">
+  <div class="screen">
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas"></canvas>
+    <div id="status"></div>
   </div>
+
+  <div class="polaroid-bottom">
+    <span>125308060</span>
+    <em>live in the moment ♡</em>
+  </div>
+</div>
+
+      <button id="startBtn">📷 MULAI KAMERA</button>
+      <p class="hint">* Pastikan izin kamera diizinkan</p>
+    </section>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
