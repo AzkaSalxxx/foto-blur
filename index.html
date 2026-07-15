@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
+  <title>Blur Cam</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,18 +15,15 @@
           <span class="control minimize"></span>
           <span class="control zoom"></span>
         </div>
+        <div class="window-title">blur cam</div>
       </div>
-      <div class="window-content">
-        <div class="camera-area">
-          <div class="polaroid">
-            <div class="screen">
-              <video id="video" autoplay playsinline></video>
-              <canvas id="canvas"></canvas>
-              <div id="status"></div>
-            </div>
-            <div class="polaroid-bottom"></div>
-          </div>
 
+      <div class="window-content">
+        <div class="screen">
+          <video id="video" autoplay playsinline></video>
+          <canvas id="canvas"></canvas>
+          <div id="status"></div>
+          
           <button id="startBtn">
             <svg viewBox="0 0 24 24" class="start-icon">
               <path d="M12 8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m7.34 11.23L16 16.89V18c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h3.38l1.62-2.17C9.37 2.3 9.68 2 10 2h4c.32 0 .63.3.99.73L16.61 5H20c.55 0 1 .45 1 1v12c0 .32-.3.63-.73.99l.01.24H19.34z"/>
