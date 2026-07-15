@@ -12,6 +12,9 @@ body {
   color: #1a1a1a;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  display: flex; /* Untuk memusatkan window */
+  justify-content: center;
+  align-items: center;
 }
 
 /* Menghilangkan tekstur kertas */
@@ -20,110 +23,93 @@ body::before {
 }
 
 .page {
-  min-height: 100vh;
-  padding: 64px 48px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 48px;
 }
 
+/* Section Intro disembunyikan sepenuhnya */
 .intro {
-  position: relative;
+  display: none;
+}
+
+/* Container Window macOS */
+.macos-window {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0,0,0,0.02);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
-/* Menyembunyikan elemen dekoratif ala scrapbook */
-.camera-icon,
-.stars,
-.tape,
-.top-tape,
-.mini-tape {
-  display: none;
+.window-titlebar {
+  height: 38px;
+  background: rgba(245, 245, 245, 0.9);
+  backdrop-filter: blur(10px); /* Efek vibrant Mac */
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  justify-content: space-between;
 }
 
-h1 {
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 700;
-  letter-spacing: -1.5px;
-  line-height: 1.1;
-  margin: 0;
-  color: #111;
+.control-buttons {
+  display: flex;
+  gap: 8px;
 }
 
-.label {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #666;
-}
-
-/* Disederhanakan menjadi garis pembatas tipis */
-.line {
-  display: block;
-  width: 40px;
-  height: 2px;
-  background: #e0e0e0;
-  margin: 16px 0;
-}
-
-.line span,
-.line b {
-  display: none;
-}
-
-.note {
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
   position: relative;
-  width: 100%;
-  max-width: 480px;
-  background: #ffffff;
-  padding: 32px;
-  border: 1px solid #eaeaea;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+  transition: all 0.15s ease;
 }
 
-.note p {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.6;
-  color: #555;
+.control.close { background-color: #ff5f57; }
+.control.minimize { background-color: #ffbd2e; }
+.control.zoom { background-color: #28c940; }
+
+/* Menambahkan ikon kecil saat hover untuk realisme */
+.macos-window:hover .control.close::after { content: '✕'; position: absolute; top: 0.5px; left: 2.5px; font-size: 8px; color: #440000; opacity: 0.5; }
+.macos-window:hover .control.minimize::after { content: '—'; position: absolute; top: -1px; left: 1.5px; font-size: 10px; color: #444400; opacity: 0.5; }
+.macos-window:hover .control.zoom::after { content: '＋'; position: absolute; top: -0.5px; left: 1px; font-size: 9px; color: #004400; opacity: 0.5; }
+
+.window-title {
+  display: none; /* Title kosong */
 }
 
-.mini-polaroid {
-  width: 120px;
-  height: 120px;
-  background: #f5f5f5;
-  margin-top: 24px;
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
+.window-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.smile {
-  font-size: 32px;
+/* Menyembunyikan elemen dekoratif lama */
+.camera-icon, .stars, .tape, .top-tape, .mini-tape, h1, .label, .line, .note, .mini-polaroid {
+  display: none;
 }
 
 .camera-area {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .polaroid {
   width: 100%;
-  max-width: 800px;
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.05);
+  background: #fdfdfd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   border: 1px solid #f0f0f0;
 }
 
@@ -131,13 +117,12 @@ h1 {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: #f0f0f0;
+  background: #0d0d0d;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
-video,
-canvas {
+video, canvas {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -151,13 +136,13 @@ video {
 
 #status {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 12px;
-  height: 12px;
+  top: 14px;
+  right: 14px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2), 0 0 0 6px rgba(239, 68, 68, 0.05);
   z-index: 999;
 }
 
@@ -166,63 +151,55 @@ video {
 }
 
 .polaroid-bottom {
-  height: 80px;
+  height: 50px; /* Dipersempit karena tidak ada teks */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #888;
-  font-size: 14px;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
-.polaroid-bottom em {
-  font-size: 16px;
-  color: #111;
-  font-style: normal;
-  font-weight: 500;
+.polaroid-bottom span, .polaroid-bottom em {
+  display: none; /* Menghilangkan teks bawah */
 }
 
+/* Tombol Mulai yang Direvisi */
 button {
-  margin-top: 48px;
+  margin-top: 32px;
   border: none;
-  padding: 16px 40px;
+  padding: 18px; /* Padding untuk ikon lingkaran */
   background: #111;
   color: white;
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   font-size: 16px;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: 50%; /* Tombol ikon lingkaran */
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
 }
 
 button:hover {
   background: #333;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.start-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor; /* Mengikuti warna teks tombol */
 }
 
 .hint {
-  font-size: 14px;
-  color: #888;
-  margin-top: 16px;
+  display: none; /* Hint dihapus */
 }
 
 @media (max-width: 950px) {
   .page {
-    grid-template-columns: 1fr;
-    padding: 32px 24px;
-    gap: 48px;
-  }
-
-  h1 {
-    font-size: 40px;
-  }
-
-  .polaroid-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    height: auto;
+    padding: 24px;
   }
 }
