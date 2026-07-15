@@ -3,52 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Peace Blur Polaroid</title>
-  <link rel="stylesheet" href="style.css" />
+  <title></title> <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="page">
-    <section class="intro">
-      <div class="camera-icon">▣</div>
-      <div class="stars">✦ ✧</div>
+    <section class="macos-window">
+      <div class="window-titlebar">
+        <div class="control-buttons">
+          <span class="control close"></span>
+          <span class="control minimize"></span>
+          <span class="control zoom"></span>
+        </div>
+        <div class="window-title"></div> </div>
+      <div class="window-content">
+        <div class="camera-area">
+          <div class="polaroid">
+            <div class="screen">
+              <video id="video" autoplay playsinline></video>
+              <canvas id="canvas"></canvas>
+              <div id="status"></div>
+            </div>
+            <div class="polaroid-bottom">
+              </div>
+          </div>
 
-      <h1>PEACE BLUR</h1>
-      <div class="label">web camera effect</div>
-
-      <div class="line">
-        <span></span>
-        <b>♡</b>
+          <button id="startBtn">
+            <svg viewBox="0 0 24 24" class="start-icon">
+              <path d="M12 8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m7.34 11.23L16 16.89V18c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h3.38l1.62-2.17C9.37 2.3 9.68 2 10 2h4c.32 0 .63.3.99.73L16.61 5H20c.55 0 1 .45 1 1v12c0 .32-.3.63-.73.99l.01.24H19.34z"/>
+            </svg>
+          </button>
+          </div>
       </div>
-
-      <div class="note">
-        <div class="tape"></div>
-        <p>Tunjukkan gesture ✌️<br />untuk membuat kamera blur</p>
-      </div>
-
-      <div class="mini-polaroid">
-        <div class="mini-tape"></div>
-        <div class="smile">☺</div>
-      </div>
-    </section>
-
-    <section class="camera-area">
-      <div class="top-tape"></div>
-
-      <div class="polaroid">
-  <div class="screen">
-    <video id="video" autoplay playsinline></video>
-    <canvas id="canvas"></canvas>
-    <div id="status"></div>
-  </div>
-
-  <div class="polaroid-bottom">
-    <span>125308060</span>
-    <em>live in the moment ♡</em>
-  </div>
-</div>
-
-      <button id="startBtn">📷 MULAI KAMERA</button>
-      <p class="hint">* Pastikan izin kamera diizinkan</p>
     </section>
   </main>
 
