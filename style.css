@@ -8,13 +8,14 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh; /* Memaksa tinggi pas 100% layar */
-  overflow: hidden; /* Mengunci total agar tidak ada scrollbar */
+  height: 100vh; 
+  overflow: hidden; 
   background: #fafafa;
   display: flex;
   justify-content: center;
   align-items: center;
   -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 .page {
@@ -26,33 +27,37 @@ body {
   padding: 24px;
 }
 
-/* Container Window macOS */
+/* Window Utama macOS */
 .macos-window {
-  width: 90vw; /* Responsif sesuai lebar */
-  max-width: 800px; /* Batas maksimal lebar di laptop besar */
-  height: 85vh; /* Responsif sesuai tinggi */
-  max-height: 600px; /* Batas maksimal tinggi agar tidak kepanjangan */
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0,0,0,0.03);
+  width: 90vw;
+  max-width: 800px; 
+  height: 85vh; 
+  max-height: 550px; 
+  background: #000; /* Latar hitam untuk layar kamera kosong */
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Konten di dalam tidak akan keluar dari frame mac */
+  overflow: hidden; 
 }
 
+/* Title Bar macOS dengan Teks di Tengah */
 .window-titlebar {
   height: 38px;
-  background: rgba(245, 245, 245, 0.9);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background: linear-gradient(to bottom, #f3f3f3, #dfdfdf); /* Warna abu khas titlebar mac */
+  border-bottom: 1px solid #b3b3b3;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  justify-content: center; /* Memusatkan tulisan */
+  position: relative;
+  z-index: 10;
 }
 
 .control-buttons {
   display: flex;
   gap: 8px;
+  position: absolute;
+  left: 14px; /* Posisi tombol mac di kiri mutlak */
 }
 
 .control {
@@ -60,52 +65,35 @@ body {
   height: 12px;
   border-radius: 50%;
   position: relative;
-  transition: all 0.15s ease;
 }
 
-.control.close { background-color: #ff5f57; }
-.control.minimize { background-color: #ffbd2e; }
-.control.zoom { background-color: #28c940; }
+.control.close { background-color: #ff5f57; border: 1px solid #e0443e; }
+.control.minimize { background-color: #ffbd2e; border: 1px solid #dea123; }
+.control.zoom { background-color: #28c940; border: 1px solid #1aab29; }
 
-.macos-window:hover .control.close::after { content: '✕'; position: absolute; top: 0.5px; left: 2.5px; font-size: 8px; color: #440000; opacity: 0.5; }
-.macos-window:hover .control.minimize::after { content: '—'; position: absolute; top: -1px; left: 1.5px; font-size: 10px; color: #444400; opacity: 0.5; }
-.macos-window:hover .control.zoom::after { content: '＋'; position: absolute; top: -0.5px; left: 1px; font-size: 9px; color: #004400; opacity: 0.5; }
+/* Judul Blur Cam */
+.window-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  letter-spacing: 0.3px;
+}
 
+/* Konten / Layar Tanpa Jarak (Edge to edge) */
 .window-content {
-  flex: 1; /* Mengisi sisa ruang bawah titlebar */
-  padding: 24px;
+  flex: 1; 
+  padding: 0; /* Menghilangkan jarak lebar */
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.camera-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  gap: 24px; /* Jarak antara polaroid dan tombol */
-}
-
-.polaroid {
-  width: 100%;
-  max-width: 550px; /* Menjaga agar tampilan kamera tidak kebesaran */
-  background: #fdfdfd;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  border: 1px solid #f0f0f0;
 }
 
 .screen {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  background: #0d0d0d;
-  overflow: hidden;
-  border-radius: 6px;
+  height: 100%;
+  background: #1e1e1e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 video, canvas {
@@ -113,7 +101,7 @@ video, canvas {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Memastikan video proporsional memenuhi layar */
 }
 
 video {
@@ -122,13 +110,13 @@ video {
 
 #status {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 10px;
-  height: 10px;
+  top: 16px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #ef4444;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2), 0 0 0 6px rgba(239, 68, 68, 0.05);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
   z-index: 999;
 }
 
@@ -136,14 +124,14 @@ video {
   display: none;
 }
 
-.polaroid-bottom {
-  display: none; /* Dihapus total agar hemat tempat karena tidak ada teks */
-}
-
+/* Tombol Mulai Kamera Melayang di Tengah Layar Sebelum Video Menyala */
 button {
+  position: absolute;
+  z-index: 50;
   border: none;
   padding: 16px;
-  background: #111;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   color: white;
   border-radius: 50%;
   cursor: pointer;
@@ -151,19 +139,17 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0; /* Agar tombol tidak mengecil saat layar sempit */
+  width: 64px;
+  height: 64px;
 }
 
 button:hover {
-  background: #333;
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
 }
 
 .start-icon {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   fill: currentColor;
 }
